@@ -28,6 +28,12 @@ export function deleteUserById(req, res) {
     if(isNaN(userId)) {
         res.status(400).send('Pls enter a Valid id')
     } else {
-        res.send(`Delete User with the number ${userId}`)
+        const index = users.findIndex(user => user.id === parseInt(userId));
+        if (index !== -1) {
+           users.splice(index, 1);
+           res.send(`User with id ${userId} got deleted`);
+        } else {
+           res.status(404).send('User not found');
+        }
     }
 }

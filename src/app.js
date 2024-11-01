@@ -8,7 +8,7 @@ const app = express()
 
 app.use(express.json())
 
-export const users = [
+export let users = [
     {
         id: 1,
         firstname: "Mazin",

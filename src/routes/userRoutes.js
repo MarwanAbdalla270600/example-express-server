@@ -7,7 +7,7 @@ userRouter.get('/users', getAllUsers)
 
 userRouter.get('/user/:id', getUserById)
 
-userRouter.delete('user/:id', deleteUserById)
+userRouter.delete('/user/:id', deleteUserById)
 
 userRouter.post('/user', addUser)
 
