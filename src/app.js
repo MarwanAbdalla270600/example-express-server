@@ -6,6 +6,29 @@ dotenv.config()
 
 const app = express()
 
+app.use(express.json())
+
+export const users = [
+    {
+        id: 1,
+        firstname: "Mazin",
+        lastname: "Abdalla"
+      },
+      {
+        id: 2,
+        firstname: "Nikola",
+        lastname: "Stankovic"
+      }, {
+        id: 3,
+        firstname: "Dunja",
+        lastname: "Nawasreh"
+      }, {
+        id: 4,
+        firstname: "Hamada",
+        lastname: "Abdalla"
+      },
+]
+
 
 const port = process.env.PORT
 console.log(port)
@@ -17,6 +40,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api', userRouter)
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Sever is running on port ${port}`)
 })
+
