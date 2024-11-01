@@ -1,6 +1,14 @@
 import express, { response } from 'express'
+import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRouter from './routes/userRoutes.js'
+
+mongoose.set("strictQuery", false);
+const mongoDB = "mongodb://127.0.0.1/my_database";
+
+mongoose.connect(mongoDB).then(success => console.log('connected to db')).catch(err => console.log(`Error connecting to DB: ${err}`))
+
+
 
 dotenv.config()
 
@@ -13,20 +21,20 @@ export let users = [
         id: 1,
         firstname: "Mazin",
         lastname: "Abdalla"
-      },
-      {
+    },
+    {
         id: 2,
         firstname: "Nikola",
         lastname: "Stankovic"
-      }, {
+    }, {
         id: 3,
         firstname: "Dunja",
         lastname: "Nawasreh"
-      }, {
+    }, {
         id: 4,
         firstname: "Hamada",
         lastname: "Abdalla"
-      },
+    },
 ]
 
 

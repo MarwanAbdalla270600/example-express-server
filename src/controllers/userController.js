@@ -1,3 +1,4 @@
+import { UserModel } from "../../database/schema.js"
 import { users } from "../app.js"
 
 export function getAllUsers(req, res) {
@@ -17,8 +18,10 @@ export function getUserById(req, res) {
     res.send(user)
 }
 
-export function addUser(req, res) {
+export async function addUser(req, res) {
     const user = req.body
+    const userData = new UserModel(user)
+    userData.save().then(success=>console.log('success')).catch(err=>console.log(error))
     users.push(user)
     res.send(user)
 }
