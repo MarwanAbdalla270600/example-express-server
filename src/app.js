@@ -1,54 +1,33 @@
-import express, { response } from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import userRouter from './routes/userRoutes.js'
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import userRouter from './routes/userRoutes.js';
 
+dotenv.config();
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb://127.0.0.1/my_database";
 
-mongoose.connect(mongoDB).then(success => console.log('connected to db')).catch(err => console.log(`Error connecting to DB: ${err}`))
+const mongoDB = process.env.DATABASE;
 
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to DB'))
+    .catch(err => console.log(`Error connecting to DB: ${err}`));
 
+const app = express();
+const port = process.env.PORT || 3000;
 
-dotenv.config()
+app.use(express.json());    //middleware for JSON Parsing
 
-const app = express()
+// here are my routers
+app.use('/api', userRouter);
 
-app.use(express.json())
-
-export let users = [
-    {
-        id: 1,
-        firstname: "Mazin",
-        lastname: "Abdalla"
-    },
-    {
-        id: 2,
-        firstname: "Nikola",
-        lastname: "Stankovic"
-    }, {
-        id: 3,
-        firstname: "Dunja",
-        lastname: "Nawasreh"
-    }, {
-        id: 4,
-        firstname: "Hamada",
-        lastname: "Abdalla"
-    },
-]
-
-
-const port = process.env.PORT
-console.log(port)
-
+// standart route
 app.get('/', (req, res) => {
-    res.send('Welcome to index page')
-})
+    res.send('Welcome to index page');
+});
 
 
 
-app.use('/api', userRouter)
-const server = app.listen(port, () => {
-    console.log(`Sever is running on port ${port}`)
-})
 
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
