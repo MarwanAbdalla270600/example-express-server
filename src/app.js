@@ -8,7 +8,7 @@ mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.DATABASE;
 
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoDB)
     .then(() => console.log('Connected to DB'))
     .catch(err => console.log(`Error connecting to DB: ${err}`));
 

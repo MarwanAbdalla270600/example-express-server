@@ -1,9 +1,13 @@
-import { UserDbModel } from "../../database/userSchema.js";
+import { UserDbModel } from "../database-schemas/userSchema.js";
+import { getAllUsersFromDatabase } from "../repository/userRepository.js";
 
-export function getAllUsers(req, res) {
-  UserDbModel.find()
-    .then((data) => res.json(data))
-    .catch(() => res.status(500).send("Error accured fetching data"));
+export async function getAllUsers(req, res) {
+ const users = await getAllUsersFromDatabase()
+ if(users) {
+  res.send(users)
+ } else {
+  res.status(500).send('Users could not be fetched. Internal Server error')
+ }
 }
 
 export function getUserById(req, res) {
