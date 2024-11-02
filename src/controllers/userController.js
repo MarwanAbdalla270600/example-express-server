@@ -12,12 +12,15 @@ export async function getAllUsers(req, res) {
 
 export async function getUser(req, res) {
   const userId = req.params.id;
+  console.log(userId)
   let user = null
   if (isNaN(userId)) {
+    console.log('check')
     user = await getUserByNameFromDatabase(userId)
   } else {
     user = await getUserByIdFromDatabase(userId)
   }
+  console.log(user)
   if(user) {
     res.send(user)
   } else {
@@ -38,7 +41,7 @@ export async function addUser(req, res) {
 
 export async function deleteUser(req, res) {
   const userId = req.params.id;
-  const user = null
+  let user = null
   if (isNaN(userId)) {
     user = await deleteUserByNameFromDatabase(userId)
   } else {

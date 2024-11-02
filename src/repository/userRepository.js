@@ -33,9 +33,9 @@ export async function getAllUsersFromDatabase() {
   }
   
   // Delete a user by name
-  export async function deleteUserByNameFromDatabase(name) {
+  export async function deleteUserByNameFromDatabase(username) {
     try {
-      return await UserDbModel.findOneAndDelete({ name }).exec();
+      return await UserDbModel.findOneAndDelete({ username: username }).exec();
     } catch (err) {
       console.error(`Error deleting user by name from the Database: ${err}`);
       return undefined;
@@ -53,9 +53,9 @@ export async function getAllUsersFromDatabase() {
   }
   
   // Get a user by name
-  export async function getUserByNameFromDatabase(name) {
+  export async function getUserByNameFromDatabase(username) {
     try {
-      return await UserDbModel.findOne({ name }).exec();
+      return await UserDbModel.findOne({ username: username }).exec();
     } catch (err) {
       console.error(`Error fetching user by name from the Database: ${err}`);
       return undefined;
